@@ -1,0 +1,16 @@
+.idea/
+*.iml
+.svn/*
+target/
+*.class
+.settings
+.classpath
+.project
+
+.gitignore-sohu
+cachecloud-custom-sohu/
+*application-local-sohu.yml
+*application-test-sohu.yml
+*application-online-sohu.yml
+*bootstrap.yml
+
