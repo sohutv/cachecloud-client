@@ -20,16 +20,16 @@
         <module>cachecloud-client-redisson</module>
     </modules>
 
-    <!-- sohu private repository -->
+    <!-- your company private nexus repository -->
     <distributionManagement>
         <snapshotRepository>
-            <id>sohu-nexus-snapshots</id>
-            <url>http://index.tv.sohuno.com/nexus/content/repositories/snapshots</url>
+            <id>xxx-nexus-snapshots</id>
+            <url>http://{nexus_domain}/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
 
         <repository>
-            <id>sohu-nexus-releases</id>
-            <url>http://index.tv.sohuno.com/nexus/content/repositories/releases</url>
+            <id>xxx-nexus-releases</id>
+            <url>http://{nexus_domain}/nexus/content/repositories/releases</url>
         </repository>
     </distributionManagement>
 
