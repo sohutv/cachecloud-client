@@ -163,7 +163,7 @@ public class ShardedJedisPoolTest {
     // items on one shard
     // alter shard 1 and recreate pool
     pool.destroy();
-    shards.set(1, new JedisShardInfo("10.19.121.73", 6383));
+    shards.set(1, new JedisShardInfo("127.0.0.1", 6383));
     pool = new ShardedJedisPool(redisConfig, shards);
     jedis = pool.getResource();
     long actual = 0;
@@ -184,19 +184,19 @@ public class ShardedJedisPoolTest {
 
   @Test
   public void startWithUrlString() {
-    Jedis j = new Jedis("10.19.121.73", 6383);
+    Jedis j = new Jedis("127.0.0.1", 6383);
     j.auth("foobared");
     j.set("foo", "bar");
     j.disconnect();
 
-    j = new Jedis("10.19.121.73", 6380);
+    j = new Jedis("127.0.0.1", 6380);
     j.auth("foobared");
     j.set("foo", "bar");
     j.disconnect();
 
     List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
-    shards.add(new JedisShardInfo("redis://:foobared@10.19.121.73:6383"));
-    shards.add(new JedisShardInfo("redis://:foobared@10.19.121.73:6380"));
+    shards.add(new JedisShardInfo("redis://:foobared@127.0.0.1:6383"));
+    shards.add(new JedisShardInfo("redis://:foobared@127.0.0.1:6380"));
 
     GenericObjectPoolConfig redisConfig = new GenericObjectPoolConfig();
     ShardedJedisPool pool = new ShardedJedisPool(redisConfig, shards);
@@ -214,19 +214,19 @@ public class ShardedJedisPoolTest {
 
   @Test
   public void startWithUrl() throws URISyntaxException {
-    Jedis j = new Jedis("10.19.121.73", 6383);
+    Jedis j = new Jedis("127.0.0.1", 6383);
     j.auth("foobared");
     j.set("foo", "bar");
     j.disconnect();
 
-    j = new Jedis("10.19.121.73", 6380);
+    j = new Jedis("127.0.0.1", 6380);
     j.auth("foobared");
     j.set("foo", "bar");
     j.disconnect();
 
     List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
-    shards.add(new JedisShardInfo(new URI("redis://:foobared@10.19.121.73:6383")));
-    shards.add(new JedisShardInfo(new URI("redis://:foobared@10.19.121.73:6380")));
+    shards.add(new JedisShardInfo(new URI("redis://:foobared@127.0.0.1:6383")));
+    shards.add(new JedisShardInfo(new URI("redis://:foobared@127.0.0.1:6380")));
 
     GenericObjectPoolConfig redisConfig = new GenericObjectPoolConfig();
     ShardedJedisPool pool = new ShardedJedisPool(redisConfig, shards);
@@ -249,8 +249,8 @@ public class ShardedJedisPoolTest {
     config.setBlockWhenExhausted(false);
 
     List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
-    shards.add(new JedisShardInfo(new URI("redis://:foobared@10.19.121.73:6383")));
-    shards.add(new JedisShardInfo(new URI("redis://:foobared@10.19.121.73:6380")));
+    shards.add(new JedisShardInfo(new URI("redis://:foobared@127.0.0.1:6383")));
+    shards.add(new JedisShardInfo(new URI("redis://:foobared@127.0.0.1:6380")));
 
     ShardedJedisPool pool = new ShardedJedisPool(config, shards);
 
@@ -282,8 +282,8 @@ public class ShardedJedisPoolTest {
     config.setBlockWhenExhausted(false);
 
     List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
-    shards.add(new JedisShardInfo(new URI("redis://:foobared@10.19.121.73:6383")));
-    shards.add(new JedisShardInfo(new URI("redis://:foobared@10.19.121.73:6380")));
+    shards.add(new JedisShardInfo(new URI("redis://:foobared@127.0.0.1:6383")));
+    shards.add(new JedisShardInfo(new URI("redis://:foobared@127.0.0.1:6380")));
 
     ShardedJedisPool pool = new ShardedJedisPool(config, shards);
 

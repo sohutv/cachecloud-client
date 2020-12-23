@@ -69,7 +69,7 @@ public class SSLJedisClusterTest extends JedisClusterTest {
   @Test
   public void testSSLDiscoverNodesAutomatically() {
     Set<HostAndPort> jedisClusterNode = new HashSet<HostAndPort>();
-    jedisClusterNode.add(new HostAndPort("10.18.29.123", 6800));
+    jedisClusterNode.add(new HostAndPort("127.0.0.1", 6800));
     JedisCluster jc = new JedisCluster(jedisClusterNode, DEFAULT_TIMEOUT, DEFAULT_TIMEOUT, DEFAULT_REDIRECTIONS,
     		                           null, null, DEFAULT_CONFIG, true, null, null, null, hostAndPortMap);
     Map<String, JedisPool> clusterNodes = jc.getClusterNodes();

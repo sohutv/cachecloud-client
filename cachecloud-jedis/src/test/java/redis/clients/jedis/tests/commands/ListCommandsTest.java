@@ -105,7 +105,7 @@ public class ListCommandsTest extends JedisCommandTestBase {
 
   @Test
   public void lrange() {
-//    jedis = new Jedis("10.19.121.91", 6400);      //redis-4.0.4
+//    jedis = new Jedis("127.0.0.1", 6400);      //redis-4.0.4
 //    jedis.auth("e7680c7444a373fba5dd1c2570c08863");
     jedis.rpush("foo", "a");
     jedis.rpush("foo", "b");

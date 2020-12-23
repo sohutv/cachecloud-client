@@ -19,16 +19,16 @@ import redis.clients.jedis.exceptions.JedisDataException;
 import redis.clients.jedis.tests.utils.JedisSentinelTestUtil;
 
 public class JedisSentinelTest {
-  private static final String MASTER_NAME = "sentinel-10.19.121.226-6380";
+  private static final String MASTER_NAME = "sentinel-127.0.0.1-6380";
   private static final String MONITOR_MASTER_NAME = "mymastermonitor";
   private static final String REMOVE_MASTER_NAME = "mymasterremove";
-  private static final String FAILOVER_MASTER_NAME = "sentinel-10.19.121.226-6380";
-  private static final String MASTER_IP = "10.19.121.73";
+  private static final String FAILOVER_MASTER_NAME = "sentinel-127.0.0.1-6380";
+  private static final String MASTER_IP = "127.0.0.1";
 
 //  protected static HostAndPort master = HostAndPortUtil.getRedisServers().get(0);
-  private static HostAndPort master = new HostAndPort("10.19.121.226", 6380);
+  private static HostAndPort master = new HostAndPort("127.0.0.1", 6380);
 //  protected static HostAndPort slave = HostAndPortUtil.getRedisServers().get(4);
-  protected static HostAndPort slave = new HostAndPort("10.19.123.134", 6380);
+  protected static HostAndPort slave = new HostAndPort("127.0.0.1", 6380);
 
   protected static HostAndPort sentinel = HostAndPortUtil.getSentinelServers().get(0);
 

@@ -16,8 +16,8 @@ public final class HostAndPortUtil {
   }
 
   static {
-    redisHostAndPortList.add(new HostAndPort("10.19.121.73", Protocol.DEFAULT_PORT + 1));
-    redisHostAndPortList.add(new HostAndPort("10.19.121.73", 6383));
+    redisHostAndPortList.add(new HostAndPort("127.0.0.1", Protocol.DEFAULT_PORT + 1));
+    redisHostAndPortList.add(new HostAndPort("127.0.0.1", 6383));
     redisHostAndPortList.add(new HostAndPort("localhost", Protocol.DEFAULT_PORT + 2));
     redisHostAndPortList.add(new HostAndPort("localhost", Protocol.DEFAULT_PORT + 3));
     redisHostAndPortList.add(new HostAndPort("localhost", Protocol.DEFAULT_PORT + 4));

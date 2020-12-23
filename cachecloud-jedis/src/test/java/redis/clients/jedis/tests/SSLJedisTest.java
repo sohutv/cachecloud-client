@@ -39,7 +39,7 @@ public class SSLJedisTest {
   @Test
   public void connectWithUrl() {
     // The "rediss" scheme instructs jedis to open a SSL/TLS connection.
-    Jedis jedis = new Jedis("rediss://10.19.121.73:6380");
+    Jedis jedis = new Jedis("rediss://127.0.0.1:6380");
     jedis.auth("foobared");
     assertEquals("PONG", jedis.ping());
     jedis.close();
@@ -51,7 +51,7 @@ public class SSLJedisTest {
   @Test
   public void connectWithoutShardInfo() {
     // The "rediss" scheme instructs jedis to open a SSL/TLS connection.
-    Jedis jedis = new Jedis(URI.create("rediss://10.19.121.73:6380"));
+    Jedis jedis = new Jedis(URI.create("rediss://127.0.0.1:6380"));
     jedis.auth("foobared");
     assertEquals("PONG", jedis.ping());
     jedis.close();
@@ -65,7 +65,7 @@ public class SSLJedisTest {
    */
   @Test
   public void connectWithShardInfo() throws Exception {
-    final URI uri = URI.create("rediss://10.19.121.73:6380");
+    final URI uri = URI.create("rediss://127.0.0.1:6380");
     final SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
     // These SSL parameters ensure that we use the same hostname verifier used
     // for HTTPS.
@@ -94,7 +94,7 @@ public class SSLJedisTest {
    */
   @Test
   public void connectWithShardInfoByIpAddress() throws Exception {
-    final URI uri = URI.create("rediss://10.19.121.73:6380");
+    final URI uri = URI.create("rediss://127.0.0.1:6380");
     final SSLSocketFactory sslSocketFactory = createTrustStoreSslSocketFactory();
     // These SSL parameters ensure that we use the same hostname verifier used
     // for HTTPS.
@@ -129,7 +129,7 @@ public class SSLJedisTest {
    */
   @Test
   public void connectWithShardInfoAndCustomHostnameVerifier() {
-    final URI uri = URI.create("rediss://10.19.121.73:6380");
+    final URI uri = URI.create("rediss://127.0.0.1:6380");
     final SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
     final SSLParameters sslParameters = new SSLParameters();
 
@@ -148,7 +148,7 @@ public class SSLJedisTest {
    */
   @Test
   public void connectWithShardInfoAndCustomSocketFactory() throws Exception {
-    final URI uri = URI.create("rediss://10.19.121.73:6380");
+    final URI uri = URI.create("rediss://127.0.0.1:6380");
     final SSLSocketFactory sslSocketFactory = createTrustStoreSslSocketFactory();
     final SSLParameters sslParameters = new SSLParameters();
 
@@ -170,7 +170,7 @@ public class SSLJedisTest {
    */
   @Test
   public void connectWithShardInfoAndCustomHostnameVerifierByIpAddress() {
-    final URI uri = URI.create("rediss://10.19.121.73:6380");
+    final URI uri = URI.create("rediss://127.0.0.1:6380");
     final SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
     final SSLParameters sslParameters = new SSLParameters();
 
@@ -204,7 +204,7 @@ public class SSLJedisTest {
   @Test
   public void connectWithShardInfoAndEmptyTrustStore() throws Exception {
 
-    final URI uri = URI.create("rediss://10.19.121.73:6380");
+    final URI uri = URI.create("rediss://127.0.0.1:6380");
     final SSLSocketFactory sslSocketFactory = createTrustNoOneSslSocketFactory();
 
     JedisShardInfo shardInfo = new JedisShardInfo(uri, sslSocketFactory, null, null);
