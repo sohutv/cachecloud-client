@@ -13,7 +13,6 @@
     <artifactId>cachecloud-client</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>cachecloud-client-crossroom-redis</module>
         <module>cachecloud-client-redis</module>
         <module>cachecloud-jedis</module>
         <module>cachecloud-client-spectator</module>
