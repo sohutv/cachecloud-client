@@ -205,3 +205,14 @@ public class RedisDao {
     }
 }
 ```
+
+#### 支持与帮助
+
++ QQ群：534429768
++ Redis开发运维公众号：关注Redis开发运维实战，发布Cachecloud最新动态，帮大家减轻工作负担。
+<img src="static/img/subcribe.png" width="40%"/>
+
++ 微信：如果大家有公网资源可以联系我，会加入到开源版本服务资源部署试用，提高大家的用户体验。
+<img src="static/img/wechat.png" width="40%"/>
+
+如果你觉得对你有帮助，欢迎Star。
