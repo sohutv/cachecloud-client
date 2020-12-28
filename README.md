@@ -73,6 +73,33 @@ public class RedisConfiguration {
         JedisPool jedisPool = ClientBuilder.redisStandalone(appId).build();
         return jedisPool;
     }
+
+    /**
+     * 跨机房客户端CrossRoomCluster
+     */
+    @Bean(destroyMethod = "close")
+    public PipelineCluster majorPipelineCluster(@Value("${cachecloud.demo.majorAppId") long majorAppId) {
+        PipelineCluster pipelineCluster = ClientBuilder.redisCluster(majorAppId).build();
+        return pipelineCluster;
+    }
+
+    @Bean(destroyMethod = "close")
+    public PipelineCluster minorPipelineCluster(@Value("${cachecloud.demo.minorAppId") long minorAppId) {
+        PipelineCluster pipelineCluster = ClientBuilder.redisCluster(minorAppId).build();
+        return pipelineCluster;
+    }
+
+    @Bean
+    public CrossRoomCluster crossRoomCluster(@Value("${cachecloud.demo.majorAppId}") long majorId,
+                                             PipelineCluster majorPipelineCluster,
+                                             @Value("${cachecloud.demo.minorAppId}") long minorId,
+                                             PipelineCluster minorPipelineCluster) {
+        CrossRoomCluster crossRoomCluster = RedisCrossRoomClientBuilder
+                .redisCluster(majorId, majorPipelineCluster, minorId, minorPipelineCluster)
+                .build();
+        return crossRoomCluster;
+    }
+
 }
 
 
@@ -91,6 +118,9 @@ public class RedisDao {
 
     @Autowired
     private JedisPool jedisPool;
+
+    @Autowired
+    private CrossRoomCluster crossRoomCluster;
 
     public String getFromCluster(String key) {
         String value = pipelineCluster.get(key);
@@ -130,6 +160,35 @@ public class RedisDao {
             }
         }
         return null;
+    }
+
+    /**
+     * 跨机房客户端读操作
+     *
+     * @param key
+     *
+     * @return
+     */
+    public String getFromCrossRoomCluster(String key) {
+        String value = crossRoomCluster.get(key);
+        log.info("value={}", value);
+        return value;
+    }
+
+    /**
+     * 跨机房客户端双写操作，同步写主机房，异步写副机房
+     *
+     * @param key
+     * @param value
+     * @return 主机房写操作结果
+     */
+    public String setCrossRoomCluster(String key, String value) throws InterruptedException, ExecutionException, TimeoutException {
+        String majorResult = crossRoomCluster.set(key, value);
+        //获取异步写副机房的结果
+        Future<String> minorFuture = CrossRoomClusterCommand.threadLocal.get();
+        String minorResult = minorFuture.get(20, TimeUnit.MILLISECONDS);
+        log.info("set CrossRoom redis, majorResult={}, minorResult={}", majorResult, minorResult);
+        return majorResult;
     }
 }
 
